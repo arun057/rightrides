@@ -28,16 +28,18 @@ Google Spreadsheets API - to store data and avoid the need for a database, we co
 
 ===== Install NodeJS server =====
 
-Rails
+  Rails
+  
+  Copy database.example.yml -> database.yml 
+  
+  bundle
+  rake db:create
+  rake db:migrate
+  rake db:seed
 
-Copy database.example.yml -> database.yml 
+  rails s 
 
-bundle
-rake db:create
-rake db:migrate
-
-rails s 
-
+Access localhost:3000 to get to the server.
 
 ======
 
