@@ -25,5 +25,22 @@ function updatePosition(lat, lng){
 }
 
 $(document).ready(function(){
-	autoUpdate();
+	if(showStuff){
+		showUpdate();
+	}else{
+		autoUpdate();
+	}
 });
+
+
+function showUpdate(){
+	$.ajax({
+		url: 'last_position',
+		dataType: 'json',
+		type: 'GET',
+		success: function(data){
+			$('#positions').append($('<div>' + data.lat + ' - ' + data.lng + '</div><br/>'));
+		}
+	});
+	setTimeout(showUpdate, 5000);
+}

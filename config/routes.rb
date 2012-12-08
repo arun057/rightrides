@@ -1,5 +1,7 @@
 Myapp::Application.routes.draw do
-  get "navigator/index"
+  get "navigator" => 'navigator#index'
+  get "positions" => 'navigator#positions'
+  get 'last_position' => 'navigator#get_last_location'
   post "api/update/location" => 'navigator#location_update'
 
   devise_for :users
