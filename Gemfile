@@ -45,4 +45,6 @@ gem 'devise'
 gem 'uuid'
 
 # for tracking stuff.
-gem 'geoloqi'
+gem 'google-api-client'
+
+
