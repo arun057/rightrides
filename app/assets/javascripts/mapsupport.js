@@ -50,7 +50,7 @@ function drawMarker(profile, latitude, longitude) {
   marker = new google.maps.Marker({
     position: new google.maps.LatLng(latitude, longitude),
     map: map,
-    icon: '/images/car_' + profile.display_name.toLowerCase() + '.png'
+    icon: '/assets/car_' + profile.display_name.toLowerCase() + '.png'
   });
   geoloqiMarkers.push(marker);
 

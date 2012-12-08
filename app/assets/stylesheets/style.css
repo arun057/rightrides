@@ -12,7 +12,7 @@ body {
 }
 
 #header {
-	background: url(../images/rr_logo_small.png) center center no-repeat;
+	background: url(../assets/rr_logo_small.png) center center no-repeat;
 	height: 0;
 	width: 151px;
 	overflow: hidden;
