@@ -26,7 +26,7 @@ Passport - Simple authentication
 It would be nice to add:
 Google Spreadsheets API - to store data and avoid the need for a database, we could write to the existing RightRides spreadsheet
 
-===== Install NodeJS server =====
+===== Install Rails  =====
 
 Rails
 
