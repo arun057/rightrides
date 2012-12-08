@@ -39,7 +39,7 @@ function showUpdate(){
 		dataType: 'json',
 		type: 'GET',
 		success: function(data){
-			$('#positions').append($('<div>' + data.lat + ' - ' + data.lng + '</div><br/>'));
+			$('#positions').prepend($('<div>' + data.id + ' => ' + data.lat + ' - ' + data.lng + '</div><br/>'));
 		}
 	});
 	setTimeout(showUpdate, 5000);
