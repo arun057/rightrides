@@ -43,7 +43,13 @@ Access localhost:3000 to get to the server.
 
 ======
 
-What's done so far (as of 1/19/12):
+What's done so far (as of 12/08/12):
+
+- Moved project to Rails
+  - hosting on app fog
+  - dispatcher.rightrides.org
+  - api for the android app to send in position data
+  - /api/location/update -> POST (lat, lng, name)
 
 - Dispatcher web portal with:
 	- Google Map integrated with Geoloqi to track navigator phones
@@ -51,6 +57,7 @@ What's done so far (as of 1/19/12):
 	- "Add a Rider" form with data that currently isn't being used - it just shows up in a javascript alert
 
 Next steps:
+- Finish the android app and deploy to devices
 - "Add a Rider" data should actually add rider to map
 - "Add a Rider" data should be added to spreadsheet
 - Ability to mark rider as picked up / dropped off (either from dispatcher portal or from navigator phone)
