@@ -26,7 +26,7 @@ Passport - Simple authentication
 It would be nice to add:
 Google Spreadsheets API - to store data and avoid the need for a database, we could write to the existing RightRides spreadsheet
 
-===== Install Rails  =====
+===== Install Rails
 
   Rails
   
@@ -40,14 +40,6 @@ Google Spreadsheets API - to store data and avoid the need for a database, we co
   rails s 
 
 Access localhost:3000 to get to the server.
-
-======
-
-ADDING A NAVIGATOR PHONE
-
-- Download the Geoloqi app onto the phone - make an account
-- From a computer, go to developers.geoloqi.com - log in to your geoloqi account
-- Add the token (it should looks something like this: '5276-09d6f72728ee71713875d5d2c93304ba90ec040b') to the list "var tokens" found at the top of public/javascript/geoloqi.js
 
 ======
 
