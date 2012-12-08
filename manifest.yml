@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: rightrides
+    framework:
+      name: rails3
+      info:
+        mem: 1024M
+        description: Rails Application
+        exec: 
+    infra: aws
+    url: ${name}.${target-base}
+    mem: 1024M
+    instances: 2
+    services:
+      rightrides-mysql-28522:
+        type: mysql
