@@ -43,3 +43,6 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'uuid'
+
+# for tracking stuff.
+gem 'geoloqi'
