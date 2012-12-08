@@ -1,4 +1,7 @@
 Myapp::Application.routes.draw do
+  get "navigator/index"
+  post "api/update/location" => 'navigator#location_update'
+
   devise_for :users
   root :to => 'dashboard#index'
 
