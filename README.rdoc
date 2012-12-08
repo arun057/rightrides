@@ -1,3 +1,33 @@
+RightRides offers women and LGBTQ individuals a free, safe, late night ride home on Friday and Saturday nights from 11:59 PM - 3 AM, (early Saturday or Sunday morning) in 45 NYC neighborhoods across four NYC boroughs. To call for a ride, the dispatch number is (888) 215-SAFE (7233). 
+
+We are creating a web portal for RightRides dispatchers to connect them with navigators (who sit alongside the RightRides drivers and communicate with the dispatcher) to facilitate information regarding pick-up/drop-off of passengers.
+
+Dispatchers need to be able to:
+- Input rider name and address info when they receive a call
+   - app should record call time, add rider to spreadsheet/db
+- Assign a car to a rider
+   - app should notify navigator
+- Text a navigator
+- View map of rider and driver locations
+- Click on rider to view info
+- Click on driver to view info
+
+Navigators need to be able to:
+- Indicate a rider has been picked up/dropped off
+   - app should notify dispatcher web portal
+- Text dispatcher
+
+Tech Stack:
+Geoloqi - used to create map and do driver tracking
+Node.js - server
+Twitter Bootstrap - CSS Layout
+Passport - Simple authentication
+
+It would be nice to add:
+Google Spreadsheets API - to store data and avoid the need for a database, we could write to the existing RightRides spreadsheet
+
+===== Install NodeJS server =====
+
 Rails
 
 Copy database.example.yml -> database.yml 
@@ -7,3 +37,26 @@ rake db:create
 rake db:migrate
 
 rails s 
+
+
+======
+
+ADDING A NAVIGATOR PHONE
+
+- Download the Geoloqi app onto the phone - make an account
+- From a computer, go to developers.geoloqi.com - log in to your geoloqi account
+- Add the token (it should looks something like this: '5276-09d6f72728ee71713875d5d2c93304ba90ec040b') to the list "var tokens" found at the top of public/javascript/geoloqi.js
+
+======
+
+What's done so far (as of 1/19/12):
+
+- Dispatcher web portal with:
+	- Google Map integrated with Geoloqi to track navigator phones
+	- Embedded Google Talk window to chat with navigators
+	- "Add a Rider" form with data that currently isn't being used - it just shows up in a javascript alert
+
+Next steps:
+- "Add a Rider" data should actually add rider to map
+- "Add a Rider" data should be added to spreadsheet
+- Ability to mark rider as picked up / dropped off (either from dispatcher portal or from navigator phone)
