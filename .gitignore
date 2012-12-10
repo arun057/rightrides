@@ -14,7 +14,6 @@
 /log/*.log
 /tmp
 
-
 *.rbc
 *.sassc
 .sass-cache
@@ -33,3 +32,4 @@ rerun.txt
 pickle-email-*.html
 database.yml
 .DS_Store
+client/out/

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:id="@+id/gps_status_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_margin="30dp"
+            />
+    <ToggleButton
+        android:id="@+id/broadcast_toggle_btn"
+        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:checked="true"
+        android:textOn="On"
+        android:textOff="Off"
+        />
+
+</LinearLayout>
+
