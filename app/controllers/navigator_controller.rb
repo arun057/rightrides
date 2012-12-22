@@ -17,7 +17,7 @@ class NavigatorController < ApplicationController
   def get_last_location
     if session[:last_lat_created_time]
       @positions = Position.all(
-        :conditions => "DATE(created_at) > DATE('#{session[:last_lat_created_time]}')", 
+        :conditions => "DATE(created_at) >= DATE('#{session[:last_lat_created_time]}')", 
         :order => 'positions.created_at ASC'
       )
     else

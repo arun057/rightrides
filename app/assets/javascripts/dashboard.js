@@ -11,11 +11,6 @@ var tripRequestClickHandler = function (event) {
     $("#drop_off_address").val("");
 };
 
-$(document).ready(function () {
-	initializeMapping();
-    $('#trip_request').click(tripRequestClickHandler);
-});
-
 // mapsupport js
 var map;
 var geocoder;
@@ -153,3 +148,44 @@ function getSpreadSheetData(){
 		});
 	});
 }
+
+
+var dispatcher = function(){
+  var positions = {};
+
+  function init(){
+    getUpdate();
+  }
+
+  function getUpdate(){
+    $.ajax({
+      url: 'last_position',
+      dataType: 'json',
+      type: 'GET',
+      success: function(data){
+        positions = data;
+        updateMarkers();
+      }
+    });
+  }
+
+  function updateMarkers(){
+    // do stuff here.
+    if(positions){
+      $.each(positions, function(key, value){
+        // update markers
+      });
+    }
+    setTimeout(getUpdate, 5000);
+  }
+
+  return {
+    init : init
+  }
+}();
+
+$(document).ready(function () {
+  initializeMapping();
+    $('#trip_request').click(tripRequestClickHandler);
+  dispatcher.init();
+});
