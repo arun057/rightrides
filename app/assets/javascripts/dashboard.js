@@ -1,3 +1,21 @@
+// index js
+var tripRequestClickHandler = function (event) {
+    var requestee = $("#requestee").val();
+    var pick_up = $("#pick_up_address").val();
+    var drop_off = $("#drop_off_address").val();
+    var pick_up_time = new Date().getTime();
+    alert("Request Mapped! Requestee: " + requestee + ", Pick-up: " + pick_up + " at "+ pick_up_time +", Drop-off: " + drop_off);
+    // clear values
+    $("#requestee").val("");
+    $("#pick_up_address").val("");
+    $("#drop_off_address").val("");
+};
+
+$(document).ready(function () {
+	initializeMapping();
+    $('#trip_request').click(tripRequestClickHandler);
+});
+
 // mapsupport js
 var map;
 var geocoder;
