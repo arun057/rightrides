@@ -1,4 +1,7 @@
 Myapp::Application.routes.draw do
+  resources :cars
+
+
   get "navigator" => 'navigator#index'
   get "positions" => 'navigator#positions'
   get 'last_position' => 'navigator#get_last_location'

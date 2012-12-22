@@ -6,6 +6,15 @@ class NavigatorController < ApplicationController
   	lat = params[:lat]
   	lng = params[:lng]
   	name = params[:name]
+    car_id = params[:locationid]
+
+    if !car_id.blank?
+      car = Car.find_or_create_by_carid(car_id);
+      if !car.name.blank?
+        name = car.name
+      end
+    end
+
   	Position.create(
   		:lat => lat,
   		:lng => lng,
@@ -32,4 +41,5 @@ class NavigatorController < ApplicationController
 
   def postiions
   end
+
 end
