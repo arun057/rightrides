@@ -15,8 +15,19 @@ class NavigatorController < ApplicationController
   end
 
   def get_last_location
-  	@position = Position.last
-  	render :json => @position
+    if session[:last_lat_created_time]
+      @positions = Position.all(
+        :conditions => "DATE(created_at) > DATE('#{session[:last_lat_created_time]}')", 
+        :order => 'positions.created_at ASC'
+      )
+    else
+      @positions = Position.all(:order => 'positions.created_at ASC')
+    end
+    if !@positions.blank?
+      session[:last_lat_created_time] = @positions.last.created_at
+      @positions = @positions.index_by { |thing| thing.name }
+    end
+  	render :json => @positions
   end
 
   def postiions

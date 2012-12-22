@@ -16,7 +16,7 @@ function updatePosition(lat, lng){
 		data: {
 			'lat' : lat,
 			'lng' : lng,
-			'name' : 'somename'
+			'name' : 'someother'
 		},
 		success: function(){
 			if(console) console.log('success');
@@ -39,7 +39,8 @@ function showUpdate(){
 		dataType: 'json',
 		type: 'GET',
 		success: function(data){
-			$('#positions').prepend($('<div>' + data.id + ' => ' + data.lat + ' - ' + data.lng + '</div><br/>'));
+			console.log(data);
+			// $('#positions').prepend($('<div>' + data.id + ' => ' + data.lat + ' - ' + data.lng + '</div><br/>'));
 		}
 	});
 	setTimeout(showUpdate, 5000);
