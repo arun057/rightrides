@@ -19,6 +19,7 @@
         <option name="nightMode" value="notnight" />
         <option name="targetHashString" value="android-15" />
         <option name="theme" value="Theme" />
+        <option name="visible" value="false" />
       </GlobalState>
     </option>
   </component>
@@ -28,25 +29,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/rightrides/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/rightrides/R.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/rightrides/PostLocationTask.java" afterPath="$PROJECT_DIR$/src/com/rightrides/PostLocationTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RightRides.iml" afterPath="$PROJECT_DIR$/RightRides.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java" afterPath="$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RightRides.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356205502387" ignored="false" />
-    <file path="/RightRidesActivity.java" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356213866777" ignored="false" />
+    <file path="/RightRidesActivity.java" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356216894016" ignored="false" />
     <file path="/PostLocationTask.java" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356213645647" ignored="false" />
-    <file path="/main.xml" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356214591821" ignored="false" />
+    <file path="/main.xml" changelist="35b61e16-ce3f-46c3-8dbb-ff0142ed1478" time="1356217312369" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,20 +102,20 @@
       <file leaf-file-name="RightRidesActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="25" selection-start="2954" selection-end="2954" vertical-scroll-proportion="0.0">
+            <state line="45" column="36" selection-start="1553" selection-end="1553" vertical-scroll-proportion="-5.769231">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#1324#3367#0" expanded="true" />
-                <element signature="e#3356#3357#0" expanded="true" />
-                <element signature="e#5129#5955#0" expanded="true" />
-                <element signature="e#5944#5945#0" expanded="true" />
+                <element signature="e#1601#3644#0" expanded="true" />
+                <element signature="e#3633#3634#0" expanded="true" />
+                <element signature="e#5406#6232#0" expanded="true" />
+                <element signature="e#6221#6222#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="compiler.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="compiler.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -134,7 +127,7 @@
       <file leaf-file-name="PostLocationTask.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/rightrides/PostLocationTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="21" selection-start="1990" selection-end="1990" vertical-scroll-proportion="0.0">
+            <state line="41" column="116" selection-start="1110" selection-end="1194" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -143,22 +136,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpURLConnection.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../android/android-sdk-macosx/sources/android-15/java/net/HttpURLConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="588" column="51" selection-start="21357" selection-end="21375" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="13" selection-start="329" selection-end="329" vertical-scroll-proportion="-2.0192308">
+            <state line="19" column="39" selection-start="749" selection-end="749" vertical-scroll-proportion="0.7002457">
               <folding />
             </state>
           </provider>
@@ -167,7 +151,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="69" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
+            <state line="9" column="54" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -195,10 +179,10 @@
         <option value="$PROJECT_DIR$/src/com/example/RightRidesMain.java" />
         <option value="$PROJECT_DIR$/src/com/example/RightRidesActivity.java" />
         <option value="$PROJECT_DIR$/src/com/rightrides/LocationService.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/rightrides/PostLocationTask.java" />
-        <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/main.xml" />
       </list>
     </option>
   </component>
@@ -545,9 +529,9 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.56708163" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.56708163" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32918397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971016" sideWeight="0.6901798" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971016" sideWeight="0.6735823" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -564,8 +548,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1780029" sideWeight="0.67081606" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3264177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1780029" sideWeight="0.6735823" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3264177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -726,17 +710,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../android/android-sdk-macosx/sources/android-15/java/net/HttpURLConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="588" column="51" selection-start="21357" selection-end="21375" vertical-scroll-proportion="0.0">
+        <state line="588" column="51" selection-start="21357" selection-end="21375" vertical-scroll-proportion="0.31154683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rightrides/PostLocationTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="21" selection-start="1990" selection-end="1990" vertical-scroll-proportion="0.0">
+        <state line="41" column="116" selection-start="1110" selection-end="1194" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="54" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="36" selection-start="1553" selection-end="1553" vertical-scroll-proportion="-5.769231">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1601#3644#0" expanded="true" />
+            <element signature="e#3633#3634#0" expanded="true" />
+            <element signature="e#5406#6232#0" expanded="true" />
+            <element signature="e#6221#6222#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -746,35 +758,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="329" selection-end="329" vertical-scroll-proportion="-2.0192308">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="69" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rightrides/RightRidesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="25" selection-start="2954" selection-end="2954" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1324#3367#0" expanded="true" />
-            <element signature="e#3356#3357#0" expanded="true" />
-            <element signature="e#5129#5955#0" expanded="true" />
-            <element signature="e#5944#5945#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="19" column="39" selection-start="749" selection-end="749" vertical-scroll-proportion="0.7002457">
           <folding />
         </state>
       </provider>

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.*;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,8 +37,13 @@ public class RightRidesActivity extends Activity {
 
         final Button toggleBroadcastBtn = (Button) findViewById(R.id.broadcast_toggle_btn);
         final TextView gpsStatusView = (TextView) findViewById(R.id.gps_status_txt);
+        final TextView deviceIdView = (TextView) findViewById(R.id.device_id_txt);
+
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        deviceIdView.setText("Car ID: \n" + deviceId);
 
         gpsStatusListener = new GpsStatus.Listener() {
             @Override
