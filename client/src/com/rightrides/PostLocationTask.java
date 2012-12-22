@@ -13,9 +13,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -56,7 +54,13 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
             out.flush();
             out.close();
 
-            Log.d("POST",  "" + urlConnection.getResponseCode() + "| " + RIGHT_RIDES_POST_LOCATION_URL + params);
+            int responseCode;
+            try{
+                responseCode = urlConnection.getResponseCode();
+                Log.i("rightrides|POST",  "" + responseCode + "| " + RIGHT_RIDES_POST_LOCATION_URL + "?" + params);
+            }catch(IOException e){
+                Log.w("rightrides|POST",  "Could not parse response code." );
+            }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

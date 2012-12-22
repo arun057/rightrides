@@ -33,3 +33,4 @@ pickle-email-*.html
 database.yml
 .DS_Store
 client/out/
+client/gen/

@@ -8,10 +8,7 @@ package com.rightrides;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.location.GpsStatus;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +20,14 @@ import android.widget.ToggleButton;
 public class RightRidesActivity extends Activity {
 
     private static final long TEN_SECONDS = 10000l;
+    private static final long FIVE_SECONDS = 5000l;
     private static final int GPS_MIN_MOVEMENT_UPDATE = 0;
-    private static final long GPS_MIN_UPDATE_DELAY = 5000;
+    private static final long GPS_MIN_UPDATE_DELAY = 1;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Location lastLocation;
+    private GpsStatus.Listener gpsStatusListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,21 +39,22 @@ public class RightRidesActivity extends Activity {
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        locationManager.addGpsStatusListener(new GpsStatus.Listener() {
+        gpsStatusListener = new GpsStatus.Listener() {
             @Override
             public void onGpsStatusChanged(int i) {
                 switch (i) {
                     case GpsStatus.GPS_EVENT_STARTED:
                         gpsStatusView.setText("Starting GPS");
                         gpsStatusView.setTextColor(Color.LTGRAY);
+                        Log.i("rightrides|gpsstatus", "GPS started");
                         break;
                     case GpsStatus.GPS_EVENT_FIRST_FIX:
                         gpsStatusView.setText("Found GPS Satellites");
                         gpsStatusView.setTextColor(Color.LTGRAY);
+                        Log.i("rightrides|gpsstatus", "GPS satellites found");
                         break;
                     case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-
-                        if (lastLocation == null){
+                        if (lastLocation == null) {
                             gpsStatusView.setText("Searching for GPS Satellites");
                             gpsStatusView.setTextColor(Color.LTGRAY);
                         } else {
@@ -73,30 +73,48 @@ public class RightRidesActivity extends Activity {
                         lastLocation = null;
                         gpsStatusView.setText("GPS Stopped");
                         gpsStatusView.setTextColor(Color.LTGRAY);
-
+                        Log.i("rightrides|gpsstatus", "GPS Turned off by event");
                         break;
                 }
             }
-        });
+        };
 
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                lastLocation = location;
-                new PostLocationTask(RightRidesActivity.this).execute(location);
-                Log.d("gps", "new location->" + location);
+                long timeSinceLastUpdate = lastLocation == null ? System.currentTimeMillis() : System.currentTimeMillis() - lastLocation.getTime();
+
+                if (timeSinceLastUpdate > FIVE_SECONDS) {
+                    lastLocation = location;
+                    new PostLocationTask(RightRidesActivity.this).execute(location);
+                    Log.d("rightrides|locationlistener", "new location->" + location);
+                }
             }
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
+                switch(i){
+                    case LocationProvider.AVAILABLE:
+                        Log.d("rightrides|locationlistener", "location tracking available");
+                        break;
+                    case LocationProvider.OUT_OF_SERVICE:
+                        Log.d("rightrides|locationlistener", "");
+                        break;
+                    case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                        Log.d("rightrides|locationlistener", "location temporarily unavailable");
+                        break;
+                }
+                Log.d("rightrides|locationlistener", "status change for " + s);
             }
 
             @Override
             public void onProviderEnabled(String s) {
+                Log.d("rightrides|locationlistener", "provider enabled->" + s);
             }
 
             @Override
             public void onProviderDisabled(String s) {
+                Log.d("rightrides|locationlistener", "provider disabled->" + s);
             }
         };
 
@@ -106,33 +124,35 @@ public class RightRidesActivity extends Activity {
                 boolean on = ((ToggleButton) view).isChecked();
 
                 if (on) {
-                    startGpsLocationListener(locationListener);
+                    startGpsListeners();
                     Toast.makeText(RightRidesActivity.this, "GPS Tracking On", Toast.LENGTH_SHORT).show();
-                    Log.d("rightrides|togglegps", "GPS Turned on manually");
+                    Log.i("rightrides|togglegps", "GPS Turned on manually");
                 } else {
-                    locationManager.removeUpdates(locationListener);
+                    removeGpsListeners();
+                    gpsStatusView.setText("GPS Stopped");
+                    gpsStatusView.setTextColor(Color.LTGRAY);
                     Toast.makeText(RightRidesActivity.this, "GPS Tracking Off", Toast.LENGTH_SHORT).show();
-                    Log.d("rightrides|togglegps", "GPS Turned off manually");
+                    Log.i("rightrides|togglegps", "GPS Turned off manually");
                 }
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        startGpsLocationListener(locationListener);
+        startGpsListeners();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        removeGpsListeners();
+    }
 
+    private void removeGpsListeners() {
+        locationManager.removeGpsStatusListener(gpsStatusListener);
         locationManager.removeUpdates(locationListener);
     }
 
-    private void startGpsLocationListener(LocationListener locationListener) {
+    private void startGpsListeners() {
+        locationManager.addGpsStatusListener(gpsStatusListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 GPS_MIN_UPDATE_DELAY,
                 GPS_MIN_MOVEMENT_UPDATE,
