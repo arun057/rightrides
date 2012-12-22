@@ -157,7 +157,8 @@ var dispatcher = function(){
   }
 
   return {
-    init : init
+    init : init,
+    geocode: geocode
   }
 }();
 

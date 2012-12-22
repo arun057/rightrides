@@ -6,7 +6,7 @@
 		</div>
 		<div id="RRMapPane" class="pane">
 			<div class="map_div">
-				<form action="#" onsubmit="geocode(this.address.value); return false" id="RRMapForm">
+				<form action="#" onsubmit="dispatcher.geocode(this.address.value); return false" id="RRMapForm">
 					<div id="mapaddressInput">
 						<input type="text" style="width: 330px;" name="address" value="26 Court St, New York to 52 Chambers St, New York" />
 						<input type="submit" value="Go!" class="btn"/>
