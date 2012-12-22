@@ -58,10 +58,12 @@ var dispatcher = function(){
     if(positions){
       $.each(positions, function(key, value){
         //remove marker if it exists first.
-        if(carMarkers[value.name]){
-          carMarkers[value.name].setMap(null);
+        if(value.name){
+          if(carMarkers[value.name]){
+            carMarkers[value.name].setMap(null);
+          }
+          carMarkers[value.name] = drawMarker({name : value.name}, value.lat , value.lng);
         }
-        carMarkers[value.name] = drawMarker({name : value.name}, value.lat , value.lng);
       });
     }
     setTimeout(getUpdate, map_refresh_rate);
