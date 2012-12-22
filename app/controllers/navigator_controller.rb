@@ -6,7 +6,7 @@ class NavigatorController < ApplicationController
   	lat = params[:lat]
   	lng = params[:lng]
   	name = params[:name]
-    car_id = params[:locationid]
+    car_id = params[:id]
 
     if !car_id.blank?
       car = Car.find_or_create_by_carid(car_id);
