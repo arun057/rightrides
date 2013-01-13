@@ -4,23 +4,27 @@
               android:gravity="center_horizontal"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="@color/rr_lightgrey"
         >
     <TextView
             android:id="@+id/gps_status_txt"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:textSize="24dp"
-            android:layout_margin="30dp"
-
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             />
     <TextView
             android:id="@+id/device_id_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:textColor="@android:color/black"
             android:textSize="24dp"
             />
     <ToggleButton

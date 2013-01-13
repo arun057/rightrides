@@ -1,0 +1,13 @@
+<resources>
+    <color name="rr_blue">#53a6fc</color>
+    <color name="rr_midgrey">#555555</color>
+    <color name="rr_darkgrey">#424242</color>
+    <color name="rr_lightgrey">#e5e5e5</color>
+    <color name="rr_lightlightgreen">#ffd1e4e6</color>
+    <color name="rr_lightgreen">#9bc6d1</color>
+    <color name="rr_green">#7cabb7</color>
+    <color name="rr_darkgreen">#327888</color>
+    <color name="rr_midgreen">#bbdfe8</color>
+    <color name="rr_bg_green">#c7e2e8</color>
+    <color name="rr_bg_darkgreen">#9bc7d1</color>
+</resources>

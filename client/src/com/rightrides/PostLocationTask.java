@@ -24,10 +24,16 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
     public static final String RIGHT_RIDES_POST_LOCATION_URL = "http://dispatcher.rightrides.org/api/update/location";
 
     private Context context;
+    private boolean done;
 
     public PostLocationTask(Context context) {
         this.context = context;
     }
+
+    public void updateContext(Context context){
+        this.context = context;
+    }
+
 
     @Override
     protected Void doInBackground(Location... locations) {
@@ -71,9 +77,13 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
         return null;
     }
 
+    public boolean isDone(){
+        return done;
+    }
+
     @Override
     protected void onPostExecute(Void o) {
         super.onPostExecute(o);
-
+        done = true;
     }
 }

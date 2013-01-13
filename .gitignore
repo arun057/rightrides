@@ -34,3 +34,4 @@ database.yml
 .DS_Store
 client/out/
 client/gen/
+client/*.iml

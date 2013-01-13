@@ -10,35 +10,46 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.*;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class RightRidesActivity extends Activity {
+public class MainActivity extends Activity {
 
-    private static final long TEN_SECONDS = 10000l;
-    private static final long FIVE_SECONDS = 5000l;
+    private static final long GPS_TIMEOUT = 10000l;
+    private static final long TIME_BTWN_SERVER_UPDATES = 30000l;
     private static final int GPS_MIN_MOVEMENT_UPDATE = 0;
     private static final long GPS_MIN_UPDATE_DELAY = 1;
+    private static final String RR = "rightrides|";
 
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Location lastLocation;
     private GpsStatus.Listener gpsStatusListener;
+    private PostLocationTask currentPostLocationTask;
+    private int STATUS_SET_COLOR = Color.BLACK;
+    private int STATUS_PENDING_COLOR = Color.GRAY;
+    private int STATUS_OKAY_COLOR = R.color.rr_darkgreen;
+    private int STATUS_ERROR_COLOR = Color.RED;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
 
         final Button toggleBroadcastBtn = (Button) findViewById(R.id.broadcast_toggle_btn);
         final TextView gpsStatusView = (TextView) findViewById(R.id.gps_status_txt);
         final TextView deviceIdView = (TextView) findViewById(R.id.device_id_txt);
-
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -51,35 +62,36 @@ public class RightRidesActivity extends Activity {
                 switch (i) {
                     case GpsStatus.GPS_EVENT_STARTED:
                         gpsStatusView.setText("Starting GPS");
-                        gpsStatusView.setTextColor(Color.LTGRAY);
-                        Log.i("rightrides|gpsstatus", "GPS started");
+                        gpsStatusView.setTextColor(STATUS_SET_COLOR);
+                        Log.i(RR + "gpsstatus", "GPS started");
                         break;
                     case GpsStatus.GPS_EVENT_FIRST_FIX:
                         gpsStatusView.setText("Found GPS Satellites");
-                        gpsStatusView.setTextColor(Color.LTGRAY);
-                        Log.i("rightrides|gpsstatus", "GPS satellites found");
+                        gpsStatusView.setTextColor(STATUS_SET_COLOR);
+                        Log.i(RR + "gpsstatus", "GPS satellites found");
                         break;
                     case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
                         if (lastLocation == null) {
                             gpsStatusView.setText("Searching for GPS Satellites");
-                            gpsStatusView.setTextColor(Color.LTGRAY);
+                            STATUS_SET_COLOR = STATUS_PENDING_COLOR;
+                            gpsStatusView.setTextColor(STATUS_SET_COLOR);
                         } else {
                             long timeSinceLastUpdate = System.currentTimeMillis() - lastLocation.getTime();
-                            if (timeSinceLastUpdate > TEN_SECONDS) {
+                            if (timeSinceLastUpdate > GPS_TIMEOUT) {
                                 gpsStatusView.setText("Satellites lost");
-                                gpsStatusView.setTextColor(Color.RED);
+                                gpsStatusView.setTextColor(STATUS_ERROR_COLOR);
                                 lastLocation = null;
                             } else {
                                 gpsStatusView.setText("GPS Connected");
-                                gpsStatusView.setTextColor(Color.GREEN);
+                                gpsStatusView.setTextColor(STATUS_OKAY_COLOR);
                             }
                         }
                         break;
                     case GpsStatus.GPS_EVENT_STOPPED:
                         lastLocation = null;
                         gpsStatusView.setText("GPS Stopped");
-                        gpsStatusView.setTextColor(Color.LTGRAY);
-                        Log.i("rightrides|gpsstatus", "GPS Turned off by event");
+                        gpsStatusView.setTextColor(STATUS_SET_COLOR);
+                        Log.i(RR + "gpsstatus", "GPS Turned off by event");
                         break;
                 }
             }
@@ -90,10 +102,14 @@ public class RightRidesActivity extends Activity {
             public void onLocationChanged(Location location) {
                 long timeSinceLastUpdate = lastLocation == null ? System.currentTimeMillis() : System.currentTimeMillis() - lastLocation.getTime();
 
-                if (timeSinceLastUpdate > FIVE_SECONDS) {
+                if (timeSinceLastUpdate > TIME_BTWN_SERVER_UPDATES) {
                     lastLocation = location;
-                    new PostLocationTask(RightRidesActivity.this).execute(location);
-                    Log.d("rightrides|locationlistener", "new location->" + location);
+
+                    cancelCurrentPostLocationTask();
+
+                    currentPostLocationTask = new PostLocationTask(MainActivity.this);
+                    currentPostLocationTask.execute(location);
+                    Log.d(RR + "locationlistener", "new location->" + location);
                 }
             }
 
@@ -101,26 +117,26 @@ public class RightRidesActivity extends Activity {
             public void onStatusChanged(String s, int i, Bundle bundle) {
                 switch(i){
                     case LocationProvider.AVAILABLE:
-                        Log.d("rightrides|locationlistener", "location tracking available");
+                        Log.d(RR + "locationlistener", "location tracking available");
                         break;
                     case LocationProvider.OUT_OF_SERVICE:
-                        Log.d("rightrides|locationlistener", "");
+                        Log.d(RR + "locationlistener", "");
                         break;
                     case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                        Log.d("rightrides|locationlistener", "location temporarily unavailable");
+                        Log.d(RR + "locationlistener", "location temporarily unavailable");
                         break;
                 }
-                Log.d("rightrides|locationlistener", "status change for " + s);
+                Log.d(RR + "locationlistener", "status change for " + s);
             }
 
             @Override
             public void onProviderEnabled(String s) {
-                Log.d("rightrides|locationlistener", "provider enabled->" + s);
+                Log.d(RR + "locationlistener", "provider enabled->" + s);
             }
 
             @Override
             public void onProviderDisabled(String s) {
-                Log.d("rightrides|locationlistener", "provider disabled->" + s);
+                Log.d(RR + "locationlistener", "provider disabled->" + s);
             }
         };
 
@@ -131,14 +147,12 @@ public class RightRidesActivity extends Activity {
 
                 if (on) {
                     startGpsListeners();
-                    Toast.makeText(RightRidesActivity.this, "GPS Tracking On", Toast.LENGTH_SHORT).show();
-                    Log.i("rightrides|togglegps", "GPS Turned on manually");
+                    Log.i(RR + "togglegps", "GPS Turned on manually");
                 } else {
                     removeGpsListeners();
                     gpsStatusView.setText("GPS Stopped");
-                    gpsStatusView.setTextColor(Color.LTGRAY);
-                    Toast.makeText(RightRidesActivity.this, "GPS Tracking Off", Toast.LENGTH_SHORT).show();
-                    Log.i("rightrides|togglegps", "GPS Turned off manually");
+                    gpsStatusView.setTextColor(STATUS_SET_COLOR);
+                    Log.i(RR + "togglegps", "GPS Turned off manually");
                 }
             }
         });
@@ -149,7 +163,14 @@ public class RightRidesActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        cancelCurrentPostLocationTask();
         removeGpsListeners();
+    }
+
+    private void cancelCurrentPostLocationTask() {
+        if(currentPostLocationTask != null){
+            currentPostLocationTask.cancel(true);
+        }
     }
 
     private void removeGpsListeners() {

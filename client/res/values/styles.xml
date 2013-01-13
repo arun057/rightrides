@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RightRidesCustomTitleBackground">
+        <item name="android:background">@color/rr_darkgrey</item>
+    </style>
+    <style name="RightRidesTheme" parent="android:Theme">
+        <item name="android:windowTitleSize">35dip</item>
+        <item name="android:windowTitleBackgroundStyle">@style/RightRidesCustomTitleBackground</item>
+    </style>
+</resources>
