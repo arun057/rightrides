@@ -26,7 +26,7 @@ public class RightRidesSplashScreen extends Activity {
                 RightRidesSplashScreen.this.startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
-        }, 3000);
+        }, 2500);
 
     }
 

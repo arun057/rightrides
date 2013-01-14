@@ -6,11 +6,13 @@
 package com.rightrides;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.*;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +24,7 @@ import android.widget.ToggleButton;
 public class MainActivity extends Activity {
 
     private static final long GPS_TIMEOUT = 10000l;
-    private static final long TIME_BTWN_SERVER_UPDATES = 30000l;
+    private static final long MIN_DELAY_BTWN_LOC_POSTS = 30000l;
     private static final int GPS_MIN_MOVEMENT_UPDATE = 0;
     private static final long GPS_MIN_UPDATE_DELAY = 1;
     private static final String RR = "rightrides|";
@@ -37,21 +39,24 @@ public class MainActivity extends Activity {
     private int STATUS_OKAY_COLOR = R.color.rr_darkgreen;
     private int STATUS_ERROR_COLOR = Color.RED;
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
 
-        final Button toggleBroadcastBtn = (Button) findViewById(R.id.broadcast_toggle_btn);
+        final ToggleButton toggleBroadcastBtn = (ToggleButton) findViewById(R.id.broadcast_toggle_btn);
         final TextView gpsStatusView = (TextView) findViewById(R.id.gps_status_txt);
         final TextView deviceIdView = (TextView) findViewById(R.id.device_id_txt);
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            toggleBroadcastBtn.setEnabled(false);
+            toggleBroadcastBtn.setChecked(false);
+            requestUserToEnableGPS();
+        }
 
         String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         deviceIdView.setText("Car ID: \n" + deviceId);
@@ -100,13 +105,11 @@ public class MainActivity extends Activity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                long timeSinceLastUpdate = lastLocation == null ? System.currentTimeMillis() : System.currentTimeMillis() - lastLocation.getTime();
+                lastLocation = location;
 
-                if (timeSinceLastUpdate > TIME_BTWN_SERVER_UPDATES) {
-                    lastLocation = location;
-
+                long lastServerPost = currentPostLocationTask == null ? 0 : currentPostLocationTask.getStartTime();
+                if (System.currentTimeMillis() - lastServerPost > MIN_DELAY_BTWN_LOC_POSTS) {
                     cancelCurrentPostLocationTask();
-
                     currentPostLocationTask = new PostLocationTask(MainActivity.this);
                     currentPostLocationTask.execute(location);
                     Log.d(RR + "locationlistener", "new location->" + location);
@@ -115,7 +118,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-                switch(i){
+                switch (i) {
                     case LocationProvider.AVAILABLE:
                         Log.d(RR + "locationlistener", "location tracking available");
                         break;
@@ -161,15 +164,52 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            final ToggleButton toggleBroadcastBtn = (ToggleButton) findViewById(R.id.broadcast_toggle_btn);
+            toggleBroadcastBtn.setEnabled(true);
+            toggleBroadcastBtn.setChecked(true);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         cancelCurrentPostLocationTask();
         removeGpsListeners();
     }
 
+    private void requestUserToEnableGPS() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("GPS is disabled. Enable it to allow driver tracking.")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent gpsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(gpsIntent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                        final TextView textView = (TextView) MainActivity.this.findViewById(R.id.gps_status_txt);
+                        textView.setText("GPS is disabled");
+                        final ToggleButton toggleBroadcastBtn = (ToggleButton) findViewById(R.id.broadcast_toggle_btn);
+                        toggleBroadcastBtn.setEnabled(false);
+                    }
+                });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     private void cancelCurrentPostLocationTask() {
-        if(currentPostLocationTask != null){
+        if (currentPostLocationTask != null) {
             currentPostLocationTask.cancel(true);
+            Log.i(RR + "posttaskstatus", "post request taking too long, cancelling request");
         }
     }
 

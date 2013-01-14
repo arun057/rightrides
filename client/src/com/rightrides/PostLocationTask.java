@@ -10,6 +10,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.provider.Settings;
+import android.text.method.DateTimeKeyListener;
 import android.util.Log;
 
 import java.io.IOException;
@@ -25,15 +26,12 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
 
     private Context context;
     private boolean done;
+    private long startTime;
 
     public PostLocationTask(Context context) {
+        this.startTime = System.currentTimeMillis();
         this.context = context;
     }
-
-    public void updateContext(Context context){
-        this.context = context;
-    }
-
 
     @Override
     protected Void doInBackground(Location... locations) {
@@ -77,13 +75,7 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
         return null;
     }
 
-    public boolean isDone(){
-        return done;
-    }
-
-    @Override
-    protected void onPostExecute(Void o) {
-        super.onPostExecute(o);
-        done = true;
+    public long getStartTime() {
+        return startTime;
     }
 }
