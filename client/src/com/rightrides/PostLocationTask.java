@@ -25,7 +25,7 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
     public static final String RIGHT_RIDES_POST_LOCATION_URL = "http://dispatcher.rightrides.org/api/update/location";
 
     private Context context;
-    private boolean done;
+    private boolean done = false;
     private long startTime;
 
     public PostLocationTask(Context context) {
@@ -71,8 +71,17 @@ public class PostLocationTask extends AsyncTask<Location, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        done = true;
+    }
+
+    public boolean isDone() {
+        return done;
     }
 
     public long getStartTime() {

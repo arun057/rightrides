@@ -207,7 +207,7 @@ public class MainActivity extends Activity {
     }
 
     private void cancelCurrentPostLocationTask() {
-        if (currentPostLocationTask != null) {
+        if (currentPostLocationTask != null && !currentPostLocationTask.isDone()) {
             currentPostLocationTask.cancel(true);
             Log.i(RR + "posttaskstatus", "post request taking too long, cancelling request");
         }
